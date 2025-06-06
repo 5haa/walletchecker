@@ -11,7 +11,10 @@ from datetime import datetime
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+
+# Set up CORS - allow requests from frontend domain
+# In production, replace * with your actual frontend domain
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # Database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
