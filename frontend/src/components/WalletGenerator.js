@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL || '';
+
 const WalletGenerator = ({ setWallet }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -10,7 +12,7 @@ const WalletGenerator = ({ setWallet }) => {
     setError('');
     
     try {
-      const response = await axios.post('/api/generate-address');
+      const response = await axios.post(`${API_URL}/api/generate-address`);
       
       if (response.data.success) {
         setWallet({

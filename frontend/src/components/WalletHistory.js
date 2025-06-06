@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL || '';
+
 const WalletHistory = () => {
   const [wallets, setWallets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,7 +20,7 @@ const WalletHistory = () => {
     setError('');
     
     try {
-      const response = await axios.get('/api/wallets');
+      const response = await axios.get(`${API_URL}/api/wallets`);
       
       if (response.data.success) {
         setWallets(response.data.wallets);
@@ -37,7 +39,7 @@ const WalletHistory = () => {
     setError('');
     
     try {
-      const response = await axios.get(`/api/balance-history/${address}`);
+      const response = await axios.get(`${API_URL}/api/balance-history/${address}`);
       
       if (response.data.success) {
         setBalanceHistory(response.data.history);

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL || '';
+
 const BalanceChecker = () => {
   const [address, setAddress] = useState('');
   const [loading, setLoading] = useState(false);
@@ -20,7 +22,7 @@ const BalanceChecker = () => {
     setResult(null);
     
     try {
-      const response = await axios.post('/api/check-balance', { address });
+      const response = await axios.post(`${API_URL}/api/check-balance`, { address });
       
       if (response.data.success) {
         setResult({
